@@ -62,9 +62,8 @@ function gotResults(err, results) {
     resultChart.data.labels = labels;
     resultChart.data.datasets[0].data = data;
     resultChart.update();
+    console.log(results);
   }
-
-  console.log(results);
 
   const topResults = results.slice(0, 5); 
 

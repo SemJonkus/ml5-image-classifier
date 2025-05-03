@@ -45,9 +45,23 @@ function modelReady() {
   }
 }
 function gotResults(err, results) {
-  if (err) {
-    console.error(err);
-    return;
+    if (err) {
+      console.error('Fehler bei Klassifikation:', err);
+      return;
+    }
+  
+    if (!results || results.length === 0) {
+      labelOutput.innerText = 'Keine Ergebnisse';
+      return;
+    }
+  
+    const bestesResultat = results[0];
+    labelOutput.innerText = `Top: ${bestesResultat.label} (${(bestesResultat.confidence * 100).toFixed(2)}%)`;
+    const labels = results.map(r => r.label);
+    const data = results.map(r => (r.confidence * 100).toFixed(2));
+    resultChart.data.labels = labels;
+    resultChart.data.datasets[0].data = data;
+    resultChart.update();
   }
 
   console.log(results);
@@ -59,4 +73,3 @@ function gotResults(err, results) {
   resultChart.data.labels = topResults.map(r => r.label);
   resultChart.data.datasets[0].data = topResults.map(r => (r.confidence * 100).toFixed(2));
   resultChart.update();
-}

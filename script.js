@@ -1,14 +1,56 @@
-const classifier = ml5.imageClassifier('MobileNet', () => {
-    console.log('Model geladen!');
-    const image = document.getElementById('image');
-    classifier.classify(image, (err, results) => {
-      if (err) {
-        console.error(err);
-        return;
+let classifier;
+const image = document.getElementById('input-image');
+const labelOutput = document.getElementById('label-output');
+
+// Chart.js Setup
+const ctx = document.getElementById('result-chart').getContext('2d');
+let resultChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Confidence (%)',
+      data: [],
+      backgroundColor: 'rgba(0, 123, 255, 0.6)',
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {
+      x: {
+        min: 0,
+        max: 100,
+        title: {
+          display: true,
+          text: 'Confidence in %'
+        }
       }
-      const result = results[0];
-      document.getElementById('result').innerText =
-        `Label: ${result.label}, Confidence: ${(result.confidence * 100).toFixed(2)}%`;
-    });
-  });
-  
+    }
+  }
+});
+
+// ml5 Model laden & klassifizieren
+classifier = ml5.imageClassifier('MobileNet', modelReady);
+
+function modelReady() {
+  labelOutput.innerText = 'Modell bereit – klassifiziere ...';
+  classifier.classify(image, gotResults);
+}
+
+function gotResults(err, results) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(results);
+
+  const topResults = results.slice(0, 5); // top 5 Ergebnisse
+
+  labelOutput.innerText = `Top Ergebnis: ${topResults[0].label} (${(topResults[0].confidence * 100).toFixed(2)}%)`;
+
+  // Chart aktualisieren
+  resultChart.data.labels = topResults.map(r => r.label);
+  resultChart.data.datasets[0].data = topResults.map(r => (r.confidence * 100).toFixed(2));
+  resultChart.update();
+}

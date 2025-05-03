@@ -1,34 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ml5 Image Classification</title>
+  <title>ml5 Image Classifier</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/ml5@latest/dist/ml5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h2>Image Classification mit ml5.js</h2>
-  <img id="test-image" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Pug_600.jpg" width="300"/>
-  <p id="result">Ergebnis: ...</p>
+  <h1>ml5.js Bildklassifikation</h1>
 
-  <script>
-    const classifier = ml5.imageClassifier('MobileNet', () => {
-      console.log('Model geladen!');
-      classifyImage();
-    });
+  <div class="container">
+    <div class="image-container">
+      <img id="input-image" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Pug_600.jpg" crossorigin="anonymous" />
+      <p id="label-output">Lade Modell ...</p>
+    </div>
 
-    function classifyImage() {
-      const image = document.getElementById('test-image');
-      classifier.classify(image, (err, results) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        console.log(results);
-        document.getElementById('result').innerText =
-          `Label: ${results[0].label}, Confidence: ${(results[0].confidence * 100).toFixed(2)}%`;
-      });
-    }
-  </script>
+    <div class="chart-container">
+      <canvas id="result-chart"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

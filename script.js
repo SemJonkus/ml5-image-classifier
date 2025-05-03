@@ -1,8 +1,6 @@
-let classifier;
+
 const image = document.getElementById('input-image');
 const labelOutput = document.getElementById('label-output');
-
-// Chart.js Setup
 const ctx = document.getElementById('result-chart').getContext('2d');
 let resultChart = new Chart(ctx, {
   type: 'bar',
@@ -29,14 +27,23 @@ let resultChart = new Chart(ctx, {
   }
 });
 
-// ml5 Model laden & klassifizieren
-classifier = ml5.imageClassifier('MobileNet', modelReady);
+
+const classifier = ml5.imageClassifier('MobileNet', modelReady);
 
 function modelReady() {
-  labelOutput.innerText = 'Modell bereit – klassifiziere ...';
-  classifier.classify(image, gotResults);
-}
+  labelOutput.innerText = 'Modell bereit – warte auf Bild...';
 
+  const image = document.getElementById('input-image');
+
+  image.onload = () => {
+    labelOutput.innerText = 'Bild geladen – klassifiziere ...';
+    classifier.classify(image, gotResults);
+  };
+
+  if (image.complete && image.naturalHeight !== 0) {
+    image.onload(); 
+  }
+}
 function gotResults(err, results) {
   if (err) {
     console.error(err);
@@ -45,11 +52,10 @@ function gotResults(err, results) {
 
   console.log(results);
 
-  const topResults = results.slice(0, 5); // top 5 Ergebnisse
+  const topResults = results.slice(0, 5); 
 
   labelOutput.innerText = `Top Ergebnis: ${topResults[0].label} (${(topResults[0].confidence * 100).toFixed(2)}%)`;
 
-  // Chart aktualisieren
   resultChart.data.labels = topResults.map(r => r.label);
   resultChart.data.datasets[0].data = topResults.map(r => (r.confidence * 100).toFixed(2));
   resultChart.update();

@@ -48,7 +48,6 @@ function gotResults(err, results) {
   console.log("gotResults called", err, results);
   if (err) {
     console.error(err);
-    return;
   }
 
   if (!results || results.length === 0) {

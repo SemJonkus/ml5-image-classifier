@@ -45,6 +45,7 @@ function modelReady() {
 }
 
 function gotResults(err, results) {
+  console.log("gotResults called", err, results);
   if (err) {
     console.error(err);
     return;
@@ -56,11 +57,12 @@ function gotResults(err, results) {
   }
 
   const labels = results.map(r => r.label);
-  const confidences = results.map(r => (r.confidence * 100).toFixed(2));
-
+  const confidences = results.map(r => parseFloat((r.confidence * 100).toFixed(2)));
+  console.log("Results:", results);
   // Chart aktualisieren
   resultChart.data.labels = labels;
   resultChart.data.datasets[0].data = confidences;
   resultChart.update();
+  console.log("Chart updated with:", resultChart.data);
   console.log("Aktualisiere Chart mit:", labels, confidences);
 }

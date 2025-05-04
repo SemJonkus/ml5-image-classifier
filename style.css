@@ -19,3 +19,8 @@ body {
   width: 400px;
   height: 300px;
 }
+#result-chart {
+  display: block;
+  border: 1px solid #ccc;
+  background: #c53838;
+}

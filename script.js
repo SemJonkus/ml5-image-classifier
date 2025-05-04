@@ -1,5 +1,4 @@
 let classifier;
-const image = document.getElementById('input-image');
 const labelOutput = document.getElementById('label-output');
 
 // Chart.js Setup
@@ -31,8 +30,18 @@ let resultChart = new Chart(ctx, {
 classifier = ml5.imageClassifier('MobileNet', modelReady);
 
 function modelReady() {
-  labelOutput.innerText = 'Modell bereit – klassifiziere ...';
-  classifier.classify(image, gotResults);
+  labelOutput.innerText = 'Modell bereit – warte auf Bild...';
+
+  const image = document.getElementById('input-image');
+
+  image.onload = () => {
+    labelOutput.innerText = 'Bild geladen – klassifiziere ...';
+    classifier.classify(image, gotResults);
+  };
+
+  if (image.complete && image.naturalHeight !== 0) {
+    image.onload();
+  }
 }
 
 function gotResults(err, results) {

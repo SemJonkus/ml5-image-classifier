@@ -41,14 +41,17 @@ function gotResults(err, results) {
     return;
   }
 
-  console.log(results);
+  if (!results || results.length === 0) {
+    labelOutput.innerText = 'Keine Ergebnisse';
+    return;
+  }
 
-  const topResults = results.slice(0, 3); 
-
-  labelOutput.innerText = `Top Ergebnis: ${topResults[0].label} (${(topResults[0].confidence * 100).toFixed(2)}%)`;
+  const labels = results.map(r => r.label);
+  const confidences = results.map(r => (r.confidence * 100).toFixed(2));
 
   // Chart aktualisieren
-  resultChart.data.labels = topResults.map(r => r.label);
-  resultChart.data.datasets[0].data = topResults.map(r => (r.confidence * 100).toFixed(2));
+  resultChart.data.labels = labels;
+  resultChart.data.datasets[0].data = confidences;
   resultChart.update();
+  console.log("Aktualisiere Chart mit:", labels, confidences);
 }

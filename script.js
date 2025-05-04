@@ -28,8 +28,6 @@ let resultChart = new Chart(ctx, {
     }
   }
 });
-
-// ml5 Model laden & klassifizieren
 classifier = ml5.imageClassifier('MobileNet', modelReady);
 
 function modelReady() {
@@ -45,7 +43,7 @@ function gotResults(err, results) {
 
   console.log(results);
 
-  const topResults = results.slice(0, 5); // top 5 Ergebnisse
+  const topResults = results.slice(0, 3); 
 
   labelOutput.innerText = `Top Ergebnis: ${topResults[0].label} (${(topResults[0].confidence * 100).toFixed(2)}%)`;
 

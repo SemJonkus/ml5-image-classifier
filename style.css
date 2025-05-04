@@ -1,21 +1,21 @@
 body {
-    font-family: sans-serif;
-    margin: 2rem;
-    background: #f9f9f9;
-  }
-  
-  .container {
-    display: flex;
-    gap: 2rem;
-  }
-  
-  .image-container img {
-    max-width: 300px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .chart-container {
-    width: 400px;
-    height: 300px;
-  }
+  font-family: sans-serif;
+  margin: 2rem;
+  background: #f9f9f9;
+}
+
+.container {
+  display: flex;
+  gap: 2rem;
+}
+
+.image-container img {
+  max-width: 300px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+.chart-container {
+  width: 400px;
+  height: 300px;
+}

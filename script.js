@@ -1,6 +1,8 @@
-
+let classifier;
 const image = document.getElementById('input-image');
 const labelOutput = document.getElementById('label-output');
+
+// Chart.js Setup
 const ctx = document.getElementById('result-chart').getContext('2d');
 let resultChart = new Chart(ctx, {
   type: 'bar',
@@ -27,48 +29,28 @@ let resultChart = new Chart(ctx, {
   }
 });
 
-
-const classifier = ml5.imageClassifier('MobileNet', modelReady);
+// ml5 Model laden & klassifizieren
+classifier = ml5.imageClassifier('MobileNet', modelReady);
 
 function modelReady() {
-  labelOutput.innerText = 'Modell bereit – warte auf Bild...';
-
-  const image = document.getElementById('input-image');
-
-  image.onload = () => {
-    labelOutput.innerText = 'Bild geladen – klassifiziere ...';
-    classifier.classify(image, gotResults);
-  };
-
-  if (image.complete && image.naturalHeight !== 0) {
-    image.onload(); 
-  }
+  labelOutput.innerText = 'Modell bereit – klassifiziere ...';
+  classifier.classify(image, gotResults);
 }
+
 function gotResults(err, results) {
-    if (err) {
-      console.error('Fehler bei Klassifikation:', err);
-      return;
-    }
-  
-    if (!results || results.length === 0) {
-      labelOutput.innerText = 'Keine Ergebnisse';
-      return;
-    }
-  
-    const bestesResultat = results[0];
-    labelOutput.innerText = `Top: ${bestesResultat.label} (${(bestesResultat.confidence * 100).toFixed(2)}%)`;
-    const labels = results.map(r => r.label);
-    const data = results.map(r => (r.confidence * 100).toFixed(2));
-    resultChart.data.labels = labels;
-    resultChart.data.datasets[0].data = data;
-    resultChart.update();
-    console.log(results);
+  if (err) {
+    console.error(err);
+    return;
   }
 
-  const topResults = results.slice(0, 5); 
+  console.log(results);
+
+  const topResults = results.slice(0, 5); // top 5 Ergebnisse
 
   labelOutput.innerText = `Top Ergebnis: ${topResults[0].label} (${(topResults[0].confidence * 100).toFixed(2)}%)`;
 
+  // Chart aktualisieren
   resultChart.data.labels = topResults.map(r => r.label);
   resultChart.data.datasets[0].data = topResults.map(r => (r.confidence * 100).toFixed(2));
   resultChart.update();
+}

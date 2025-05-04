@@ -19,7 +19,32 @@ body {
   width: 400px;
   height: 300px;
 }
-#result-chart {
+#result-chart-1 {
+  display: block;
+  border: 1px solid #ccc;
+  background: #f0e5e5;
+}
+#result-chart-2 {
+  display: block;
+  border: 1px solid #ccc;
+  background: #f0e5e5;
+}
+#result-chart-3 {
+  display: block;
+  border: 1px solid #ccc;
+  background: #f0e5e5;
+}
+#result-chart-4 {
+  display: block;
+  border: 1px solid #ccc;
+  background: #f0e5e5;
+}
+#result-chart-5 {
+  display: block;
+  border: 1px solid #ccc;
+  background: #f0e5e5;
+}
+#result-chart-6 {
   display: block;
   border: 1px solid #ccc;
   background: #f0e5e5;

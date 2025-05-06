@@ -140,28 +140,67 @@ h2 {
   border: 2px solid #e0e0e0;
 }
 
-.discussion-container {
+.documentation-container {
   background: #ffffff;
   border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  margin-bottom: 20px;
   text-align: left;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.discussion-container h2 {
-  font-size: 1.8rem;
+.documentation-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.documentation-container h2 {
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   color: #0056b3;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-.discussion-container p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #555;
+.documentation-container h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
   margin-bottom: 10px;
+  color: #333;
+}
+
+.documentation-container p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.documentation-container ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.documentation-container ul li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #444;
+}
+
+.documentation-container a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.documentation-container a:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 /* Responsive Design */

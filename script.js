@@ -51,7 +51,7 @@ function modelReady() {
         }
       }
     });
-    chartInstances.push(chart); // Store the chart instance
+    chartInstances.push(chart); 
 
     image.onload = () => {
       labelOutput.innerText = 'Bild geladen – klassifiziere ...';

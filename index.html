@@ -50,15 +50,17 @@
         <canvas id="result-chart-6" width="400" height="200"></canvas>
       </div>
     </div>
-    <div class="discussion-container">
+    <div class="documentation-container">
       <h2>Diskussion der Ergebnisse</h2>
       <p>
         Die Klassifikation hat bei den Bildern <strong>1, 2 und 3</strong> gut funktioniert, da diese klare und eindeutige Merkmale aufweisen, die vom Modell erkannt werden konnten. 
-        Bei den Bildern <strong>4, 5 und 6</strong> war die Klassifikation weniger erfolgreich, vermutlich weil die Bilder entweder unscharf, komplex oder für das Modell unbekannt waren.
+        Bei den Bildern <strong>4, 5 und 6</strong> war die Klassifikation weniger erfolgreich. Hierbei wurden gezielt nach Schwächen des Modells gesucht. Das erste falscherkannte Bild ist ein
+        eine Abbildung eines Sonnenbarsches als Computergrafik. Das Modell konnte erkennen, dass es sich um einen Fisch handelt, aber nicht, dass es sich um einen Sonnenbarsch handelt. Beim zweiten Bild 
+        handelt es sich um ein Bild des Fußballspielers Cristiano Ronaldo, welcher als "soccer ball" klassifiziert wurde. Das Modell hat hier die Person im Bild nicht erkannt, sondern jedoch den Kontext in dem das Bild entstanden ist. 
+        Auf der Website wurde gesagt, dass das Modell Menschen in Bildern erkennen kann, doch das hat es in diesem Fall nicht getan. Das letzte Bild ist ein Bild von Pikachu, einem Pokémon. Das Modell hat hier nichts erkennen können, weil Computerspielcharaktere nicht in den Testdaten vorhanden waren.
       </p>
       <p>
-        Ich habe gelernt, dass die Genauigkeit der Klassifikation stark von der Qualität und der Klarheit der Bilder abhängt. 
-        Bilder mit klaren, gut definierten Objekten werden besser erkannt als solche mit Hintergrundrauschen oder ungewöhnlichen Perspektiven.
+        Ich habe gelernt, dass die Genauigkeit der Klassifikation stark von der Qualität und der Art der Bilder abhängt. Das Modell hat Probleme Arten/Typen zuzuordnent, jedoch kann sie häufig den Kontext erkennen, es sei den es wurde überhaupt nicht trainiert. Außer den Beispielen wurden weitere Tests durch geführt, dabei wurde eine Apfelart geraten, die nicht stimmte. Zudem wurde ein Bild von Obama nicht erkannt, was gegen das Zitat der Website " It can identify objects, animals, and even people in a picture" spricht.
       </p>
     </div>
     <!-- Drop Menu for Custom Image -->
@@ -72,8 +74,47 @@
       <p id="user-label-output">Noch kein Bild geladen</p>
       <canvas id="user-result-chart" width="300" height="150"></canvas>
     </div>
+    
+    <div class="documentation-container">
+    <h2>Dokumentation</h2>
+  
+    <!-- Technische Dokumentation -->
+    <h3>1. Technisch</h3>
+    <p>
+      <strong>Frameworks:</strong> 
+      <ul>
+        <li><strong>ml5.js:</strong> Wird verwendet, um das vortrainierte MobileNet-Modell für die Bildklassifikation zu nutzen.</li>
+        <li><strong>Chart.js:</strong> Dient zur Visualisierung der Klassifikationsergebnisse in Form von Diagrammen.</li>
+      </ul>
+    </p>
+    <p>
+      <strong>Technische Besonderheiten:</strong> 
+      Die Lösung verwendet ein responsives Design, das mit CSS umgesetzt wurde, um die Website mobil nutzbar zu machen. 
+      Dadurch ist auch Mobil die Usability gegeben. Zur visuellen Unterstützung des Nutzers wurden Hover-Effekte hinzugefügt. 
+      Außerdem werden Inhalte dynamisch geladen und aktualisiert, durch funktionen wie "onload" und "change".
+    </p>
+  
+    <!-- Fachliche Dokumentation -->
+    <h3>2. Fachlich</h3>
+    <p>
+      <strong>Ansatz:</strong> Die Implementierung basiert auf dem vortrainierten MobileNet-Modell, das mit ml5.js eingebunden wurde. Die Bilder werden geladen, klassifiziert und die Ergebnisse in Diagrammen dargestellt. 
+      Zur Bearbeitung der Aufgabe wurden die Dokumentationen von ml5.js und Chart.js verwendet, sowie das gegebene Tutorial-Video. Es wurde besonders acht auf die Usability und die Flexibilität der Anwendung gegeben. 
+    </p>
+    <p>
+      <strong>Resultate:</strong> Die Klassifikation funktioniert gut bei klaren und eindeutigen Bildern von Objekten. Das Modell weist jedoch klare Probleme auf bei Bildern, die nicht diesen Kriterien entsprechen.
+      Dadurch hat es Probleme, was erwartbar war, bei der Zuordnung von Untergruppen oder spezifischen Arten, sowie bei Bildern von Menschen oder Daten, die nicht trainiert wurden.
+    </p>
+    <p>
+      <strong>Quellen:</strong> 
+      <ul>
+        <li>ml5.js Dokumentation: <a href="https://ml5js.org/" target="_blank">https://ml5js.org/</a></li>
+        <li>Chart.js Dokumentation: <a href="https://www.chartjs.org/" target="_blank">https://www.chartjs.org/</a></li>
+      </ul>
+    </p>
+  </div>
   </div>
 
+  
   <script src="script.js" defer></script>
 </body>
 </html>

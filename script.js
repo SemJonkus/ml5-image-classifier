@@ -34,7 +34,7 @@ function modelReady() {
         datasets: [{
           label: 'Confidence (%)',
           data: [],
-          backgroundColor: 'rgba(0, 123, 255, 0.6)',
+          backgroundColor: 'rgba(0, 255, 42, 0.6)',
         }]
       },
       options: {
@@ -110,3 +110,80 @@ function gotResults(results, err) {
   console.log("Chart updated with:", resultChart.data);
   console.log("Aktualisiere Chart mit:", labels, confidences);
 }
+
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const userImage = document.getElementById('user-image');
+const labelOutput = document.getElementById('user-label-output');
+
+const ctx = document.getElementById('user-result-chart').getContext('2d');
+let resultChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Confidence (%)',
+      data: [],
+      backgroundColor: 'rgba(255, 99, 132, 0.6)'
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {
+      x: {
+        min: 0,
+        max: 100,
+        title: {
+          display: true,
+          text: 'Confidence in %'
+        }
+      }
+    }
+  }
+});
+
+function handleImage(file) {
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    userImage.src = e.target.result;
+    userImage.hidden = false;
+
+    userImage.onload = () => {
+      labelOutput.innerText = 'Klassifiziere...';
+      classifier.classify(userImage, (results, err) => {
+        if (err || !results) {
+          labelOutput.innerText = 'Fehler bei Klassifikation';
+          return;
+        }
+
+        const labels = results.map(r => r.label);
+        const confidences = results.map(r => (r.confidence * 100).toFixed(2));
+
+        labelOutput.innerText = `Top: ${labels[0]} (${confidences[0]}%)`;
+        resultChart.data.labels = labels;
+        resultChart.data.datasets[0].data = confidences;
+        resultChart.update();
+      });
+    };
+  };
+  reader.readAsDataURL(file);
+}
+fileInput.addEventListener('change', (e) => {
+  if (e.target.files.length > 0) {
+    handleImage(e.target.files[0]);
+  }
+});
+dropArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  dropArea.classList.add('dragover');
+});
+dropArea.addEventListener('dragleave', () => {
+  dropArea.classList.remove('dragover');
+});
+dropArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropArea.classList.remove('dragover');
+  if (e.dataTransfer.files.length > 0) {
+    handleImage(e.dataTransfer.files[0]);
+  }
+});

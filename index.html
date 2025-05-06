@@ -2,96 +2,75 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>ml5 Image Classifier</title>
+  <title>ml5 Image Classifier - Abgabe</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/ml5@latest/dist/ml5.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>ml5.js Bildklassifikation</h1>
+  <div class="main-container">
+    <h1>ml5.js Bildklassifikation EA1</h1>
 
-  <div class="container">
-    <div class="image-container">
-      <img
-      id="input-image-1"
-      src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Schwarzspitzen-Riffhai_%28Carcharhinus_melanopterus%29.jpg"
-      crossorigin="anonymous"
-    />
-      <p id="label-output-1">Lade Modell ...</p>
-    </div>
-
-    <div class="chart-container">
-      <canvas id="result-chart-1" width="400" height="200"></canvas>
-    </div>
-  </div>
-  <div class="container">
-    <div class="image-container">
-      <img
-      id="input-image-2"
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Stage3.jpg/800px-Stage3.jpg"
-      crossorigin="anonymous"
-    />
-      <p id="label-output-2">Lade Modell ...</p>
+    <!-- First 3 Images (Correct Classification) -->
+    <div class="container correct">
+      <h2>Korrekte Klassifikationen</h2>
+      <div class="image-container">
+        <div><img id="input-image-1" src="images/image3.jpeg" alt="Image 1" crossorigin="anonymous" />
+        <p id="label-output-1">Lade Modell ...</p></div>
+        <canvas id="result-chart-1" width="400" height="150"></canvas>
+      </div>
+      <div class="image-container">
+        <div><img id="input-image-2" src="images/image5.png" alt="Image 2" crossorigin="anonymous" />
+        <p id="label-output-2">Lade Modell ...</p></div>
+        <canvas id="result-chart-2" width="400" height="150"></canvas>
+      </div>
+      <div class="image-container">
+        <div><img id="input-image-3" src="images/image1.jpg" alt="Image 3" crossorigin="anonymous" />
+        <p id="label-output-3">Lade Modell ...</p></div>
+        <canvas id="result-chart-3" width="400" height="150"></canvas>
+      </div>
     </div>
 
-    <div class="chart-container">
-      <canvas id="result-chart-2" width="400" height="200"></canvas>
+    <!-- Next 3 Images (Incorrect Classification) -->
+    <div class="container incorrect">
+      <h2>Falsche Klassifikationen</h2>
+      <div class="image-container">
+        <div><img id="input-image-4" src="images/image4.png" alt="Image 4" crossorigin="anonymous" />
+        <p id="label-output-4">Lade Modell ...</p></div>
+        <canvas id="result-chart-4" width="400" height="200"></canvas>
+      </div>
+      <div class="image-container">
+        <div><img id="input-image-5" src="images/image2.jpg" alt="Image 5" crossorigin="anonymous" />
+        <p id="label-output-5">Lade Modell ...</p></div>
+        <canvas id="result-chart-5" width="400" height="200"></canvas>
+      </div>
+      <div class="image-container">
+        <div><img id="input-image-6" src="images/image6.png" alt="Image 6" crossorigin="anonymous" />
+        <p id="label-output-6">Lade Modell ...</p></div>
+        <canvas id="result-chart-6" width="400" height="200"></canvas>
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="image-container">
-      <img
-      id="input-image-3"
-      src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Schwarzspitzen-Riffhai_%28Carcharhinus_melanopterus%29.jpg"
-      crossorigin="anonymous"
-    />
-      <p id="label-output-3">Lade Modell ...</p>
+    <div class="discussion-container">
+      <h2>Diskussion der Ergebnisse</h2>
+      <p>
+        Die Klassifikation hat bei den Bildern <strong>1, 2 und 3</strong> gut funktioniert, da diese klare und eindeutige Merkmale aufweisen, die vom Modell erkannt werden konnten. 
+        Bei den Bildern <strong>4, 5 und 6</strong> war die Klassifikation weniger erfolgreich, vermutlich weil die Bilder entweder unscharf, komplex oder für das Modell unbekannt waren.
+      </p>
+      <p>
+        Ich habe gelernt, dass die Genauigkeit der Klassifikation stark von der Qualität und der Klarheit der Bilder abhängt. 
+        Bilder mit klaren, gut definierten Objekten werden besser erkannt als solche mit Hintergrundrauschen oder ungewöhnlichen Perspektiven.
+      </p>
     </div>
-
-    <div class="chart-container">
-      <canvas id="result-chart-3" width="400" height="200"></canvas>
-    </div>
-  </div>
-  <div class="container">
-    <div class="image-container">
-      <img
-      id="input-image-4"
-      src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Schwarzspitzen-Riffhai_%28Carcharhinus_melanopterus%29.jpg"
-      crossorigin="anonymous"
-    />
-      <p id="label-output-4">Lade Modell ...</p>
-    </div>
-
-    <div class="chart-container">
-      <canvas id="result-chart-4" width="400" height="200"></canvas>
-    </div>
-  </div>
-  <div class="container">
-    <div class="image-container">
-      <img
-      id="input-image-5"
-      src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Schwarzspitzen-Riffhai_%28Carcharhinus_melanopterus%29.jpg"
-      crossorigin="anonymous"
-    />
-      <p id="label-output-5">Lade Modell ...</p>
-    </div>
-
-    <div class="chart-container">
-      <canvas id="result-chart-5" width="400" height="200"></canvas>
-    </div>
-  </div>
-  <div class="container">
-    <div class="image-container">
-      <img
-      id="input-image-6"
-      src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Schwarzspitzen-Riffhai_%28Carcharhinus_melanopterus%29.jpg"
-      crossorigin="anonymous"
-    />
-      <p id="label-output-6">Lade Modell ...</p>
-    </div>
-
-    <div class="chart-container">
-      <canvas id="result-chart-6" width="400" height="200"></canvas>
+    <!-- Drop Menu for Custom Image -->
+    <div class="upload-container">
+      <h2>Eigenes Bild Klassifizieren</h2>
+      <div id="drop-area">
+        <p>Ziehe ein Bild hierher oder wähle es aus</p>
+        <input type="file" id="file-input" accept="image/*" />
+      </div>
+      <img id="user-image" hidden />
+      <p id="user-label-output">Noch kein Bild geladen</p>
+      <canvas id="user-result-chart" width="300" height="150"></canvas>
     </div>
   </div>
 

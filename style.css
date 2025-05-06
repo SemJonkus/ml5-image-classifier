@@ -1,8 +1,8 @@
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  background-color: #f9fafc;
   color: #333;
   display: flex;
   justify-content: center;
@@ -19,10 +19,11 @@ h1 {
   font-size: 2.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #007bff;
+  color: #0056b3;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -30,7 +31,7 @@ h2 {
   font-weight: 600;
   margin: 1.5rem 0 1rem;
   text-align: center;
-  color: #333;
+  color: #444;
 }
 
 .container {
@@ -41,19 +42,31 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .image-container img {
   max-width: 300px;
   max-height: 300px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 10px;
+  border: 2px solid #f0f0f0;
+  transition: border-color 0.2s;
+}
+
+.image-container img:hover {
+  border-color: #007bff;
 }
 
 .image-container p {
@@ -66,9 +79,11 @@ h2 {
 
 .image-container canvas {
   max-width: 400px;
-  max-height: 150px;
-  border-radius: 8px;
+  max-height: 250px;
+  border-radius: 10px;
   margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
 }
 
 .correct {
@@ -80,13 +95,19 @@ h2 {
 }
 
 .upload-container {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 400px;
   margin: 0 auto;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.upload-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 #drop-area {
@@ -98,23 +119,32 @@ h2 {
   text-align: center;
   font-size: 1rem;
   color: #007bff;
+  background-color: #f9f9f9;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+#drop-area:hover {
+  background-color: #e9f5ff;
+  color: #0056b3;
 }
 
 #drop-area.dragover {
-  background-color: #e9f5ff;
+  background-color: #d0ebff;
 }
 
 #user-image {
   max-width: 100%;
   margin: 10px 0;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
 }
 
 .discussion-container {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
   text-align: left;
 }
@@ -123,7 +153,7 @@ h2 {
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #007bff;
+  color: #0056b3;
 }
 
 .discussion-container p {
@@ -136,42 +166,42 @@ h2 {
 /* Responsive Design */
 @media (max-width: 768px) {
   .image-container {
-    flex-direction: column; /* Stack image and chart vertically */
+    flex-direction: column;
     padding: 20px;
   }
 
   .image-container img {
-    max-width: 100%; /* Scale image to fit smaller screens */
+    max-width: 100%;
     max-height: 200px;
   }
 
   .image-container canvas {
-    max-width: 100%; /* Scale chart to fit smaller screens */
+    max-width: 100%;
     height: auto;
   }
 
   .upload-container {
-    width: 90%; /* Make upload container fit smaller screens */
+    width: 90%;
   }
 
   h1 {
-    font-size: 2rem; /* Reduce heading size for smaller screens */
+    font-size: 2rem;
   }
 
   h2 {
-    font-size: 1.5rem; /* Reduce subheading size for smaller screens */
+    font-size: 1.5rem;
   }
 
   .discussion-container {
-    padding: 15px; /* Reduce padding for smaller screens */
+    padding: 15px;
   }
 
   .discussion-container h2 {
-    font-size: 1.5rem; /* Adjust discussion heading size */
+    font-size: 1.5rem;
   }
 
   .discussion-container p {
-    font-size: 0.9rem; /* Adjust paragraph font size */
+    font-size: 0.9rem;
   }
 }
 
@@ -181,11 +211,11 @@ h2 {
   }
 
   .image-container img {
-    max-height: 150px; /* Further reduce image size for very small screens */
+    max-height: 150px;
   }
 
   .image-container p {
-    font-size: 1rem; /* Adjust text size */
+    font-size: 1rem;
   }
 
   .upload-container {
@@ -193,10 +223,10 @@ h2 {
   }
 
   h1 {
-    font-size: 1.8rem; /* Further reduce heading size */
+    font-size: 1.8rem;
   }
 
   h2 {
-    font-size: 1.2rem; /* Further reduce subheading size */
+    font-size: 1.2rem;
   }
 }
